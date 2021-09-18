@@ -13,38 +13,61 @@ To display the numbers, output the 5 main numbers and the power ball number as s
 */
 
 #include <iostream>
+#include <ctime>
+#include<cstdlib>
 
-int ballNumbers[5];
+int* lottery(int* arr, int size)
+{
+    /* Some operations on arr[] */
+    for (int i = 0; i < size; i++)
+    {
+        if (i == size - 1)
+        {
+            for (int j = 0; j < size; j++)
+            {
+                if (arr[i] == arr[j])
+                {
+                    arr[i] = rand() % 27;
+                }
+            }
+        }
+        else
+        {
+            for (int j = 0; j < size; j++)
+            {
+                if (arr[i] == arr[j])
+                {
+                    arr[i] = rand() % 70;
+                }
+            }
+        }
+        
+    }
+
+
+    return arr;
+}
+
+void printArray(const int* list, int size)
+{
+    for (int i = 0; i < size; i++)
+        std::cout << list[i] << " ";
+}
 
 int main()
 {
+    srand(time(0));
+    int list[6];
+    int* ptr = lottery(list, 6);
+    printArray(ptr, 6);
     
+    
+       
 
-    std::cout << "Hello World!\n";
-
- 
-}
-
-int getLotteryNumbers(int numbers, int size)
-{
-    for (int i = 0; i < size; i++)
-    {
-        checkForRecurringNumbers(i, size);
-    }
     return 0;
 }
 
-void checkForRecurringNumbers(int index, int size)
-{
-    ballNumbers[index] = rand();
-    for (int j = 0; j < size; j++)
-    {
-        if (ballNumbers[index] == ballNumbers[j])
-        {
-            checkForRecurringNumbers(index, size);
-        }
-    }
-}
+
 
 //for loop
 //while loop
